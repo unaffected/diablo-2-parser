@@ -4,7 +4,7 @@ import corpse from './corpse'
 import file from './file'
 import golem from './golem'
 import items from './items'
-import * as mercenary from './mercenary'
+import * as mercenary from './mercenary/index'
 
 const parse = (buffer: Buffer) => {
   const binary = new Binary(buffer)
