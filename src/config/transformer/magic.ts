@@ -25,27 +25,30 @@ const modifiers = (data: Record<string, any>): any[] => {
     }, [])
 }
 
-const transform = (data: Record<string, any>[]) => {
-  return data.map(magic => ({
-    key: magic.Name,
-    name: magic.Name,
-    class: magic.classspecific || undefined,
-    group: magic.group,
-    level: magic.lvl,
-    modifiers: modifiers(magic),
-    requirements: {
-      level: magic.levelreq,
-    },
-    types: [
-      magic.itype1,
-      magic.itype2,
-      magic.itype3,
-      magic.itype4,
-      magic.itype5,
-      magic.itype6,
-      magic.itype7,
-    ].filter(Boolean),
-  }))
+const transformer = (config: Record<string, any>) => {
+  return (entries: Record<string, any>[]) => {
+    return entries.map((data, index) => ({
+      index,
+      key: data.Name,
+      name: data.Name,
+      class: data.classspecific || undefined,
+      group: data.group,
+      level: data.lvl,
+      modifiers: modifiers(data),
+      requirements: {
+        level: data.levelreq,
+      },
+      types: [
+        data.itype1,
+        data.itype2,
+        data.itype3,
+        data.itype4,
+        data.itype5,
+        data.itype6,
+        data.itype7,
+      ].filter(Boolean),
+    }))
+  }
 }
 
-export default transform
+export default transformer
