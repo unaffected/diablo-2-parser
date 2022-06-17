@@ -1,0 +1,28 @@
+{
+  "name": "@unaffected/diablo.studio",
+  "version": "1.0.0",
+  "main": "dist/src/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "build:refresh": "npm run clear && npm run build",
+    "clear": "rimraf ./dist",
+    "start": "sh ./bin/entrypoint.sh",
+    "test": "jest"
+  },
+  "author": "Cody Mercer <dev@codymercer.com>",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "collect.js": "^4.34.0",
+    "module-alias": "^2.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "ts-node": "^10.8.1",
+    "tsc-watch": "^4.6.0",
+    "typescript": "^4.7.3"
+  },
+  "_moduleAliases": {
+    "!": ".",
+    "@": "src"
+  }
+}
