@@ -53,10 +53,6 @@ const parse = (binary: Binary) => {
 
   if (['tbk', 'tsc', 'ibk', 'isc'].includes(data.base.id)) {
     data.skill_id = binary.bits(5)
-
-    binary.align()
-
-    return data
   }
 
   if (data.base.type_code === 'body') {
