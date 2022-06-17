@@ -13,6 +13,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "collect.js": "^4.34.0",
+    "debug": "^4.3.4",
     "module-alias": "^2.2.2"
   },
   "devDependencies": {
