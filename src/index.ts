@@ -21,7 +21,7 @@ const parse = (buffer: Buffer) => {
   data.character.skills = character.skills(binary, data.character.class.name)
   data.items = items(binary)
   data.corpse = corpse(binary)
-  
+
   mercenary.header(binary)
 
   if (data.mercenary?.id) {
@@ -30,7 +30,7 @@ const parse = (buffer: Buffer) => {
 
   if (binary.eof()) return data
 
-  data.golem = golem(binary)
+  data.golem = golem(binary) || undefined
 
   return data
 }
