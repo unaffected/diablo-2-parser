@@ -7,8 +7,10 @@ const parse = (binary: Binary) => {
   binary.align()
   binary.save('item')
 
-  if (binary.text(2) !== 'JM') {
-    throw new ItemHeaderNotFound()
+  const header = binary.text(2)
+
+  if (header !== 'JM') {
+    throw new ItemHeaderNotFound(`item header not found: ${header}`)
   }
 
   const data: any = {}
@@ -30,6 +32,7 @@ const parse = (binary: Binary) => {
 
   if (data.is_ear) {
     binary.align()
+
     return { ...data, ...item.ear(binary) }
   }
 
@@ -48,7 +51,7 @@ const parse = (binary: Binary) => {
     data.quality.sub_id = binary.bits(3)
   }
 
-  if (data.quality.id === 2 && ['tbk', 'tsc', 'ibk', 'isc'].includes(data.base.id)) {
+  if (['tbk', 'tsc', 'ibk', 'isc'].includes(data.base.id)) {
     data.skill_id = binary.bits(5)
 
     binary.align()
@@ -56,27 +59,20 @@ const parse = (binary: Binary) => {
     return data
   }
 
-  if (data.quality.id === 2 && data.base.type_code === 'body') {
+  if (data.base.type_code === 'body') {
     data.organ = binary.bits(12)
   }
 
   if (data.quality.id === 4) {
     data.magic = item.magic(binary)
-    data.name = [
-      data.magic.prefix.name,
-      data.base.name,
-      data.magic.suffix.name,
-    ].filter(Boolean).join(' ')
   }
 
   if (data.quality.id === 5) {
     data.set = item.set(binary)
-    data.name = data.set.item_name
   }
 
   if (data.quality.id === 7) {
     data.unique = item.unique(binary)
-    data.name = data.unique.name
   }
 
   if ([6, 8].includes(data.quality.id)) {
