@@ -1,7 +1,15 @@
-node_modules
-config
-data
-output
+# .gitkeep
+!/**/.gitkeep
 
+# dependencies
+node_modules/
+
+# project
+config/
+data/
+
+# error logs
 error.log
+
+# editor
 .DS_Store
