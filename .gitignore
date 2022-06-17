@@ -2,7 +2,7 @@
 node_modules/
 
 # project
-config/
+config/**
 data/
 
 # error logs
